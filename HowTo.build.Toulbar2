@@ -33,6 +33,7 @@ sudo apt-get install cmake cmake-data cmake-curses-gui
 
 #for cross compilation under ubuntu
 #the following package are required
+# NOTE: the relevant mingw packages now have different names; search the package repository
 
 sudo apt-get install mingw32 mingw32-binutils mingw32-runtime nsis
 
@@ -44,9 +45,12 @@ mkdir build ; cd build ; cmake .. ; make package
 # by default only toulbar2 package for linux distro will be generate
 
 
-# cross compilation ==> compile toulbar2 under for win32 plateform
+# cross compilation ==> compile toulbar2 under for win32 platform
+# NOTE: cross-compilation may result in a linker error due to option "-rdynamic"; 
+#       If this happens, simply delete the option from build/CMakeFiles/toulbar2.exe.dir/link.txt and
+#       rerun "make package"
 
-cmake .. -DWIN32=ON ; make package
+cmake .. -DWIN32=ON -DSTATIC=ON; make package
 
 
 # in advanced mode you can tune your compilation option using:
